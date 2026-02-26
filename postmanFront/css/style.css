@@ -1,73 +1,631 @@
+:root {
+    --postman-orange: #FF6C37;
+    --bg-main: #212121;
+    --bg-panel: #212121;
+    --bg-sidebar: #212121;
+    --bg-activity: #212121;
+    --bg-input: #2b2b2b;
+    --bg-hover: #2c2c2c;
+    --border-color: #333333;
+    --text-main: #ebebeb;
+    --text-muted: #a6a6a6;
+    --text-blue: #097bed;
+
+    --color-get: #0cbb52;
+    --color-post: #ffb400;
+    --color-put: #097bed;
+    --color-delete: #eb2013;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
 body {
-    font-family: 'Courier New', Courier, monospace;
-    background-color: #1e1e1e;
-    color: #d4d4d4;
-    padding: 20px;
-}
-
-.main-container {
-    max-width: 800px;
-    margin: 0 auto;
-    background-color: #252526;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-}
-
-.control-panel {
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    height: 100vh;
     display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    font-size: 13px;
+}
+
+.top-navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--bg-panel);
+    height: 40px;
+    padding: 0 15px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    color: var(--text-muted);
+}
+
+.nav-left i {
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.nav-left i:hover {
+    color: var(--text-main);
+}
+
+.nav-links {
+    display: flex;
+    gap: 15px;
+    margin-left: 10px;
+}
+
+.nav-links a {
+    color: var(--text-main);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.nav-links a:hover {
+    color: #fff;
+}
+
+.nav-links .dropdown {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--text-muted);
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    color: var(--text-muted);
+}
+
+.nav-right i {
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.nav-right i:hover {
+    color: var(--text-main);
+}
+
+.btn-upgrade {
+    background-color: var(--postman-orange);
+    color: white;
+    border: none;
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.btn-upgrade:hover {
+    background-color: #e55b2b;
+}
+
+/* ==========================================================================
+           LAYOUT PRINCIPAL
+           ========================================================================== */
+.app-container {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+/* ==========================================================================
+           1. ACTIVITY BAR (Barra finita izquierda con texto debajo)
+           ========================================================================== */
+.activity-bar {
+    width: 72px;
+    background-color: var(--bg-activity);
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 10px;
+    z-index: 10;
+}
+
+.activity-icon {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-muted);
+    cursor: pointer;
+    border-left: 3px solid transparent;
+    padding: 12px 0;
+    gap: 6px;
+    transition: all 0.2s;
+}
+
+.activity-icon i {
+    font-size: 18px;
+}
+
+.activity-icon span {
+    font-size: 10px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.activity-icon:hover {
+    color: var(--text-main);
+    background-color: var(--bg-hover);
+}
+
+.activity-icon.active {
+    color: var(--text-main);
+    background-color: #2b2b2b;
+    border-left-color: var(--postman-orange);
+}
+
+.spacer {
+    flex: 1;
+}
+
+/* ==========================================================================
+           2. SIDEBAR IZQUIERDA (Panel de Entornos/Colecciones)
+           ========================================================================== */
+.sidebar-left {
+    width: 280px;
+    background-color: var(--bg-sidebar);
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-header-custom {
+    padding: 15px 15px 10px 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.team-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.team-name {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    color: var(--text-main);
+    font-size: 13px;
+}
+
+.team-name i {
+    color: var(--text-muted);
+}
+
+.sidebar-btns {
+    display: flex;
+    gap: 8px;
+}
+
+.sidebar-btns button {
+    background-color: #2b2b2b;
+    color: var(--text-main);
+    border: 1px solid transparent;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.sidebar-btns button:hover {
+    background-color: #383838;
+}
+
+.search-row {
+    display: flex;
+    align-items: center;
     gap: 10px;
+}
+
+.search-row>i.fa-plus {
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.search-row>i.fa-plus:hover {
+    color: var(--text-main);
+}
+
+.search-box {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    background-color: var(--bg-input);
+    border-radius: 4px;
+    padding: 6px 10px;
+    border: 1px solid transparent;
+}
+
+.search-box:focus-within {
+    border-color: var(--text-muted);
+}
+
+.search-box i {
+    color: var(--text-muted);
+    font-size: 12px;
+}
+
+.search-box input {
+    background: transparent;
+    border: none;
+    color: var(--text-main);
+    outline: none;
+    margin-left: 8px;
+    width: 100%;
+    font-size: 12px;
+}
+
+.globals-item {
+    padding: 10px 15px;
+    font-weight: 500;
+    color: var(--text-main);
+    font-size: 13px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.globals-item:hover {
+    background-color: var(--bg-hover);
+}
+
+/* Empty State */
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    text-align: center;
+    flex: 1;
+}
+
+.empty-state i.fa-user-astronaut {
+    font-size: 80px;
+    color: #555;
+    margin-bottom: 25px;
+}
+
+.empty-state h3 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: var(--text-main);
+}
+
+.empty-state p {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.5;
     margin-bottom: 20px;
 }
 
-select,
-input,
-button,
-textarea {
-    padding: 10px;
-    border: 1px solid #3c3c3c;
-    background-color: #3c3c3c;
-    color: white;
-    border-radius: 4px;
-}
-
-input {
-    flex-grow: 1;
-}
-
-button {
-    background-color: #0e639c;
+.empty-state a {
+    color: var(--text-blue);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
     cursor: pointer;
-    font-weight: bold;
+}
+
+.empty-state a:hover {
+    text-decoration: underline;
+}
+
+/* ==========================================================================
+           PANEL CENTRAL Y FUNCIONAL (Petición)
+           ========================================================================== */
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bg-main);
+    min-width: 0;
+}
+
+/* Tabs Superiores Idénticos */
+.workspace-tabs {
+    display: flex;
+    align-items: center;
+    background-color: var(--bg-main);
+    border-bottom: 1px solid var(--border-color);
+    height: 40px;
+    padding-right: 15px;
+}
+
+.tab-wrapper {
+    display: flex;
+    flex: 1;
+    height: 100%;
+}
+
+.tab {
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    border-right: 1px solid var(--border-color);
+    font-size: 12px;
+    color: var(--text-muted);
+    cursor: pointer;
+    border-top: 2px solid transparent;
+    gap: 8px;
+}
+
+.tab.active {
+    color: var(--text-main);
+    background-color: var(--bg-main);
+    border-top-color: var(--postman-orange);
+}
+
+.tab .method {
+    color: var(--color-get);
+    font-weight: 600;
+    font-size: 10px;
+}
+
+.tab .fa-plus {
+    margin-left: 10px;
+    font-size: 14px;
+}
+
+.env-selector {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-muted);
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.env-selector i {
+    font-size: 14px;
+}
+
+/* Interfaz funcional de la petición */
+.request-bar {
+    display: flex;
+    padding: 15px;
+    gap: 0;
+    align-items: center;
+}
+
+.url-group {
+    display: flex;
+    flex: 1;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    overflow: hidden;
+    background-color: var(--bg-input);
+}
+
+#methodSelect {
+    background-color: transparent;
+    color: var(--text-main);
+    border: none;
+    padding: 8px 15px;
+    font-weight: 600;
+    font-size: 13px;
+    outline: none;
+    cursor: pointer;
+    border-right: 1px solid var(--border-color);
+}
+
+#methodSelect option {
+    background-color: var(--bg-input);
+    color: var(--text-main);
+}
+
+select option[value="GET"] {
+    color: var(--color-get);
+}
+
+select option[value="POST"] {
+    color: var(--color-post);
+}
+
+select option[value="PUT"] {
+    color: var(--color-put);
+}
+
+select option[value="DELETE"] {
+    color: var(--color-delete);
+}
+
+#urlInput {
+    flex: 1;
+    background-color: transparent;
+    border: none;
+    color: var(--text-main);
+    padding: 8px 15px;
+    font-family: monospace;
+    font-size: 13px;
+    outline: none;
+    width: 100%;
+}
+
+#sendBtn {
+    background-color: var(--text-blue);
     color: white;
     border: none;
+    padding: 0 20px;
+    height: 36px;
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 10px;
+    font-size: 13px;
+    transition: filter 0.2s;
 }
 
-button:hover {
-    background-color: #1177bb;
+#sendBtn:hover {
+    filter: brightness(1.1);
+}
+
+.config-tabs {
+    display: flex;
+    padding: 0 15px;
+    border-bottom: 1px solid var(--border-color);
+    gap: 20px;
+}
+
+.config-tab {
+    padding: 10px 0;
+    color: var(--text-muted);
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+}
+
+.config-tab.active {
+    color: var(--text-main);
+    border-bottom-color: var(--postman-orange);
 }
 
 .request-body-container {
-    display: none;
-    margin-bottom: 20px;
+    padding: 15px;
+    flex: 0 0 200px;
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid var(--border-color);
 }
 
-textarea {
-    width: 97%;
-    height: 120px;
-    font-family: monospace;
-    margin-top: 5px;
-}
-
-.response-container {
-    border-top: 1px solid #3c3c3c;
-    padding-top: 10px;
-}
-
-pre {
-    background-color: #1e1e1e;
-    padding: 10px;
-    border: 1px solid #333;
-    overflow-x: auto;
+.request-body-container textarea {
+    flex: 1;
+    background-color: var(--bg-input);
     color: #ce9178;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 15px;
+    font-family: 'Courier New', Courier, monospace;
+    resize: none;
+    outline: none;
+    font-size: 13px;
+}
+
+.response-section {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    overflow: hidden;
+    background-color: var(--bg-main);
+    border-top: 1px solid var(--border-color);
+}
+
+.response-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 15px;
+    border-bottom: 1px solid var(--border-color);
+    background-color: var(--bg-main);
+}
+
+.response-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.response-meta {
+    font-size: 12px;
+    display: flex;
+    gap: 15px;
+}
+
+.response-meta span {
+    color: var(--text-main);
+    font-family: monospace;
+}
+
+.status-green {
+    color: var(--color-get) !important;
+}
+
+.status-red {
+    color: var(--color-delete) !important;
+}
+
+.response-body {
+    flex: 1;
+    padding: 15px;
+    overflow: auto;
+}
+
+.response-body pre {
+    margin: 0;
+    font-family: 'Courier New', Courier, monospace;
+    color: #9cdcfe;
+    font-size: 13px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* ==========================================================================
+           BARRA INFERIOR (FOOTER / STATUS BAR)
+           ========================================================================== */
+.status-bar {
+    height: 30px;
+    background-color: var(--bg-panel);
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+.status-left,
+.status-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.status-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+}
+
+.status-item:hover {
+    color: var(--text-main);
+}
+
+.status-item i {
+    font-size: 13px;
 }

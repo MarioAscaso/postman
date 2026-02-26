@@ -1,42 +1,181 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DAW Postman Clone</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
 
-    <div class="main-container">
-        <h1>DAW Postman Clone</h1>
-        
-        <div class="control-panel">
-            <select id="methodSelect">
-                <option value="GET">GET</option>
-                <option value="POST">POST</option>
-                <option value="PUT">PUT</option>
-                <option value="DELETE">DELETE</option>
-            </select>
-            
-            <input type="text" id="urlInput" placeholder="Enter API URL (e.g., http://localhost:8085/api/users)">
-            
-            <button id="sendBtn">Send Request</button>
-        </div>
-
-        <div class="request-body-container">
-            <label for="jsonInput">Request Body (JSON):</label>
-            <textarea id="jsonInput" placeholder='{ "name": "John Doe", "age": 25 }'></textarea>
-        </div>
-
-        <div class="response-container">
-            <div class="meta-info">
-                <strong>Status:</strong> <span id="statusCode">---</span> | 
-                <strong>Time:</strong> <span id="responseTime">---</span> ms
+    <nav class="top-navbar">
+        <div class="nav-left">
+            <i class="fa-solid fa-bars"></i>
+            <i class="fa-solid fa-arrow-left" style="color: #555;"></i>
+            <i class="fa-solid fa-arrow-right" style="color: #555;"></i>
+            <div class="nav-links">
+                <a href="#">Home</a>
+                <a href="#" class="dropdown">Workspaces <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></a>
+                <a href="#">API Network</a>
             </div>
-            <pre id="responseOutput">Response will appear here...</pre>
         </div>
+        <div class="nav-right">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <i class="fa-solid fa-user-plus"></i>
+            <i class="fa-solid fa-gear"></i>
+            <i class="fa-regular fa-bell"></i>
+            <i class="fa-solid fa-circle-user" style="font-size: 1.2rem;"></i>
+            <button class="btn-upgrade">Upgrade <i class="fa-solid fa-chevron-down"
+                    style="font-size: 10px;"></i></button>
+        </div>
+    </nav>
+
+    <div class="app-container">
+
+        <!-- 2. ACTIVITY BAR EXACTA -->
+        <nav class="activity-bar">
+            <div class="activity-icon" title="Collections"><i class="fa-solid fa-folder"></i><span>Collections</span>
+            </div>
+            <div class="activity-icon active" title="Environments"><i
+                    class="fa-solid fa-box"></i><span>Environments</span></div>
+            <div class="activity-icon" title="History"><i class="fa-solid fa-clock-rotate-left"></i><span>History</span>
+            </div>
+            <div class="activity-icon" title="Flows"><i class="fa-solid fa-diagram-project"></i><span>Flows</span></div>
+
+            <div class="spacer"></div>
+
+            <div class="activity-icon" title="Files"><i class="fa-solid fa-folder-open"></i><span>Files<br><b
+                        style="font-size: 8px; color: #097bed;">BETA</b></span></div>
+        </nav>
+
+        <!-- 3. SIDEBAR IZQUIERDA (Panel Entornos Idéntico) -->
+        <aside class="sidebar-left">
+            <div class="sidebar-header-custom">
+                <div class="team-row">
+                    <div class="team-name">
+                        <i class="fa-solid fa-user-group"></i>
+                        Gestor Gastos DAW
+                    </div>
+                    <div class="sidebar-btns">
+                        <button>New</button>
+                        <button>Import</button>
+                    </div>
+                </div>
+
+                <div class="search-row">
+                    <i class="fa-solid fa-plus"></i>
+                    <div class="search-box">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" placeholder="Search environments">
+                    </div>
+                </div>
+            </div>
+
+            <div class="globals-item">
+                Globals
+            </div>
+
+            <div class="empty-state">
+                <i class="fa-solid fa-user-astronaut"></i>
+                <h3>You don't have any environments.</h3>
+                <p>An environment is a set of variables that allows you to switch the context of your requests.</p>
+                <a href="#">Create Environment</a>
+            </div>
+        </aside>
+
+        <!-- 4. PANEL CENTRAL FUNCIONAL (Petición) -->
+        <main class="main-content">
+            <!-- Tabs Superiores -->
+            <div class="workspace-tabs">
+                <div class="tab-wrapper">
+                    <!-- Tab simulado como tu captura, pero listo para peticiones -->
+                    <div class="tab active">
+                        <span class="method">GET</span> Untitled Request
+                    </div>
+                    <div class="tab">
+                        <i class="fa-solid fa-folder" style="color: var(--text-muted); font-size: 14px;"></i> New
+                        Collection
+                    </div>
+                    <div class="tab"><i class="fa-solid fa-plus"></i></div>
+                </div>
+
+                <div class="env-selector">
+                    <i class="fa-regular fa-eye-slash"></i> No environment <i class="fa-solid fa-chevron-down"
+                        style="font-size: 10px;"></i>
+                </div>
+            </div>
+
+            <!-- Interfaz para probar backend de Spring Boot -->
+            <div class="request-bar">
+                <div class="url-group">
+                    <select id="methodSelect">
+                        <option value="GET">GET</option>
+                        <option value="POST">POST</option>
+                        <option value="PUT">PUT</option>
+                        <option value="DELETE">DELETE</option>
+                    </select>
+                    <input type="text" id="urlInput" value="http://localhost:8085/api/users"
+                        placeholder="Introduce la URL (ej: http://localhost:8085/api/users)">
+                </div>
+                <button id="sendBtn">Send</button>
+            </div>
+
+            <div class="config-tabs">
+                <div class="config-tab">Params</div>
+                <div class="config-tab">Authorization</div>
+                <div class="config-tab">Headers (9)</div>
+                <div class="config-tab active">Body</div>
+                <div class="config-tab">Pre-request Script</div>
+                <div class="config-tab">Tests</div>
+                <div class="config-tab">Settings</div>
+            </div>
+
+            <div class="request-body-container hidden" id="bodyContainer">
+                <textarea id="jsonInput"
+                    placeholder='{&#10;  "username": "nuevo_user",&#10;  "age": 25&#10;}'></textarea>
+            </div>
+
+            <div class="response-section">
+                <div class="response-header">
+                    <div class="response-title">Response</div>
+                    <div class="response-meta">
+                        <div>Status: <span id="statusCode">---</span></div>
+                        <div>Time: <span id="responseTime">---</span> ms</div>
+                        <div>Size: <span>---</span></div>
+                    </div>
+                </div>
+                <div class="response-body">
+                    <pre id="responseOutput">Click "Send" to get a response from your Spring Boot API...</pre>
+                </div>
+            </div>
+        </main>
     </div>
 
+    <!-- 5. BARRA INFERIOR (Footer) EXACTA -->
+    <footer class="status-bar">
+        <div class="status-left">
+            <div class="status-item"><i class="fa-solid fa-bars-staggered"></i></div>
+            <div class="status-item"><i class="fa-solid fa-cloud"></i> Cloud View</div>
+            <div class="status-item"><i class="fa-solid fa-magnifying-glass"></i> Find and replace</div>
+            <div class="status-item"><i class="fa-solid fa-terminal"></i> Console</div>
+            <div class="status-item"><i class="fa-solid fa-code"></i> Terminal</div>
+        </div>
+        <div class="status-right">
+            <div class="status-item"><i class="fa-solid fa-play"></i> Runner</div>
+            <div class="status-item"><i class="fa-solid fa-satellite-dish"></i> Start Proxy</div>
+            <div class="status-item"><i class="fa-solid fa-cookie"></i> Cookies</div>
+            <div class="status-item"><i class="fa-solid fa-lock"></i> Vault</div>
+            <div class="status-item"><i class="fa-solid fa-trash"></i> Trash</div>
+            <div class="status-item"><i class="fa-regular fa-circle-question"></i></div>
+            <div class="status-item"><i class="fa-solid fa-border-none"></i></div>
+        </div>
+    </footer>
+
+    <!-- SCRIPT LOGICA FUNCIONAL -->
     <script src="js/app.js"></script>
 </body>
+
 </html>
