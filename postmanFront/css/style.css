@@ -29,19 +29,29 @@ body {
     font-size: 13px;
 }
 
-.top-navbar {
+.flex-between {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 15px;
-    border-bottom: 1px solid var(--border-color);
 }
-.nav-left, .nav-right, .nav-links {
+
+.flex-group {
     display: flex;
     align-items: center;
     gap: 15px;
+    cursor: pointer;
 }
-.nav-links a { color: var(--text-main); text-decoration: none; }
+
+.top-navbar {
+    padding: 10px 15px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.nav-links a { 
+    color: var(--text-main); 
+    text-decoration: none; 
+}
+
 .btn-upgrade {
     background-color: var(--postman-orange);
     color: white;
@@ -51,14 +61,12 @@ body {
     cursor: pointer;
 }
 
-/* --- ESTRUCTURA PRINCIPAL --- */
 .app-container {
     display: flex;
     flex: 1;
     overflow: hidden;
 }
 
-/* --- BARRA DE ICONOS (Izquierda) --- */
 .activity-bar {
     width: 60px;
     border-right: 1px solid var(--border-color);
@@ -67,6 +75,7 @@ body {
     align-items: center;
     padding-top: 10px;
 }
+
 .activity-icon {
     width: 100%;
     text-align: center;
@@ -76,39 +85,46 @@ body {
     font-size: 18px;
     border-left: 3px solid transparent;
 }
-.activity-icon:hover { color: var(--text-main); }
+
+.activity-icon:hover { 
+    color: var(--text-main); 
+}
+
 .activity-icon.active {
     color: var(--text-main);
     border-left-color: var(--postman-orange);
     background-color: var(--bg-input);
 }
 
-/* --- PANEL CENTRAL --- */
 .main-content {
     flex: 1;
     display: flex;
     flex-direction: column;
+    min-height: 0;
 }
+
 .workspace-tabs {
     display: flex;
     border-bottom: 1px solid var(--border-color);
 }
+
 .tab {
     padding: 10px 20px;
     border-right: 1px solid var(--border-color);
     border-top: 2px solid transparent;
     cursor: pointer;
 }
+
 .tab.active {
     border-top-color: var(--postman-orange);
 }
 
-/* --- BARRA DE PETICIÓN (URL y Botón) --- */
 .request-bar {
     display: flex;
     padding: 15px;
     gap: 10px;
 }
+
 .url-group {
     display: flex;
     flex: 1;
@@ -116,14 +132,21 @@ body {
     border-radius: 4px;
     background-color: var(--bg-input);
 }
+
 #methodSelect {
-    background: transparent;
+    background: var(--bg-main);
     color: var(--text-main);
     border: none;
     padding: 8px 15px;
     border-right: 1px solid var(--border-color);
     font-weight: bold;
 }
+
+#methodSelect option[value="GET"] { color: var(--color-get); font-weight: bold; }
+#methodSelect option[value="POST"] { color: var(--color-post); font-weight: bold; }
+#methodSelect option[value="PUT"] { color: var(--color-put); font-weight: bold; }
+#methodSelect option[value="DELETE"] { color: var(--color-delete); font-weight: bold; }
+
 #urlInput {
     flex: 1;
     background: transparent;
@@ -132,6 +155,7 @@ body {
     padding: 8px 15px;
     outline: none;
 }
+
 #sendBtn {
     background-color: var(--text-blue);
     color: white;
@@ -142,27 +166,29 @@ body {
     font-weight: bold;
 }
 
-/* --- CONFIGURACIÓN Y BODY --- */
 .config-tabs {
-    display: flex;
     padding: 0 15px;
-    gap: 20px;
     border-bottom: 1px solid var(--border-color);
+    align-items: flex-end;
 }
+
 .config-tab {
     padding: 10px 0;
     color: var(--text-muted);
     cursor: pointer;
 }
+
 .config-tab.active {
     color: var(--text-main);
     border-bottom: 2px solid var(--postman-orange);
 }
+
 .request-body-container {
     padding: 15px;
     height: 150px;
     display: flex;
 }
+
 #jsonInput {
     flex: 1;
     background-color: var(--bg-input);
@@ -170,42 +196,73 @@ body {
     border: 1px solid var(--border-color);
     padding: 10px;
     resize: none;
+    font-family: monospace;
 }
 
-/* --- RESPUESTA --- */
 .response-section {
     flex: 1;
     display: flex;
     flex-direction: column;
     border-top: 1px solid var(--border-color);
+    min-height: 0;
 }
+
 .response-header {
     display: flex;
     justify-content: space-between;
     padding: 10px 15px;
     border-bottom: 1px solid var(--border-color);
 }
-.response-meta { display: flex; gap: 15px; }
+
+.response-meta { 
+    display: flex; 
+    gap: 15px; 
+}
+
 .response-body {
     padding: 15px;
     overflow-y: auto;
+    overflow-x: auto;
     flex: 1;
 }
+
 .response-body pre {
     color: #9cdcfe;
     font-family: monospace;
     white-space: pre-wrap;
 }
 
-/* --- UTILIDADES Y FOOTER --- */
-.hidden { display: none !important; }
-.status-green { color: var(--color-get) !important; }
-.status-red { color: var(--color-delete) !important; }
+.hidden { 
+    display: none !important; 
+}
+
+.status-green { 
+    color: var(--color-get) !important; 
+}
+
+.status-red { 
+    color: var(--color-delete) !important; 
+}
 
 .status-bar {
-    display: flex;
-    justify-content: space-between;
     padding: 8px 15px;
     border-top: 1px solid var(--border-color);
     color: var(--text-muted);
+}
+
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40px;
+    font-family: Arial, sans-serif;
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+.empty-state i.fa-user-astronaut {
+    font-size: 80px;
+    color: #555;
+    margin-bottom: 20px;
 }

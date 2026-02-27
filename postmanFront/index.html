@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,24 +8,25 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
-    <nav class="top-navbar">
-        <div class="nav-left">
+    <nav class="top-navbar flex-between">
+        <div class="flex-group">
             <i class="fa-solid fa-bars"></i>
-            <div class="nav-links">
+            <div class="nav-links flex-group">
                 <a href="#">Home</a>
                 <a href="#">Workspaces</a>
                 <a href="#">API Network</a>
             </div>
         </div>
-        <div class="nav-right">
+        <div class="flex-group">
             <button class="btn-upgrade">Upgrade</button>
-            <i class="fa-solid fa-circle-user"></i>
+            <i class="fa-regular fa-circle-user"></i>
         </div>
     </nav>
 
     <div class="app-container">
-        
+
         <nav class="activity-bar">
             <div class="activity-icon" title="Collections"><i class="fa-solid fa-folder"></i></div>
             <div class="activity-icon active" title="Environments"><i class="fa-solid fa-box"></i></div>
@@ -32,9 +34,9 @@
         </nav>
 
         <main class="main-content">
+
             <div class="workspace-tabs">
                 <div class="tab active"><span class="method">GET</span> Untitled Request</div>
-                <div class="tab"><i class="fa-solid fa-plus"></i></div>
             </div>
 
             <div class="request-bar">
@@ -45,41 +47,67 @@
                         <option value="PUT">PUT</option>
                         <option value="DELETE">DELETE</option>
                     </select>
-                    <input type="text" id="urlInput" value="http://localhost:8085/api/users" placeholder="Introduce la URL">
+                    <input type="text" id="urlInput" value="http://localhost:8085/api/users"
+                        placeholder="Introduce la URL">
                 </div>
                 <button id="sendBtn">Send</button>
             </div>
 
-            <div class="config-tabs">
-                <div class="config-tab">Params</div>
-                <div class="config-tab">Headers</div>
-                <div class="config-tab active">Body</div>
+            <div class="config-tabs flex-between">
+                <div class="flex-group">
+                    <div class="config-tab">Docs</div>
+                    <div class="config-tab">Params</div>
+                    <div class="config-tab">Authorization</div>
+                    <div class="config-tab">Headers</div>
+                    <div class="config-tab active">Body</div>
+                    <div class="config-tab">Scripts</div>
+                    <div class="config-tab">Settings</div>
+                </div>
+                <div class="flex-group">
+                    <div class="config-tab">Cookies</div>
+                </div>
             </div>
 
             <div class="request-body-container hidden" id="bodyContainer">
-                <textarea id="jsonInput" placeholder='{&#10;  "username": "nuevo_user",&#10;  "age": 25&#10;}'></textarea>
+                <textarea id="jsonInput"
+                    placeholder='{&#10;  "username": "nuevo_user",&#10;  "age": 25&#10;}'></textarea>
             </div>
 
             <div class="response-section">
-                <div class="response-header">
+                <div class="response-header flex-between">
                     <div class="response-title">Response</div>
-                    <div class="response-meta">
+                    <div class="response-meta flex-group">
                         <div>Status: <span id="statusCode">---</span></div>
                         <div>Time: <span id="responseTime">---</span> ms</div>
                     </div>
                 </div>
                 <div class="response-body">
-                    <pre id="responseOutput">Click "Send" to get a response from your Spring Boot API...</pre>
+
+                    <pre
+                        id="responseOutput"><span class="empty-state"><i class="fa-solid fa-user-astronaut"></i><span>Enter URL and click Send to get a response</span></span></pre>
+
                 </div>
             </div>
         </main>
     </div>
 
-    <footer class="status-bar">
-        <div><i class="fa-solid fa-cloud"></i> Cloud View</div>
-        <div><i class="fa-solid fa-terminal"></i> Console</div>
+    <footer class="status-bar flex-between">
+        <div class="flex-group">
+            <div><i class="fa-solid fa-cloud"></i> Cloud View</div>
+            <div><i class="fa-solid fa-magnifying-glass"></i> Find and replace</div>
+            <div><i class="fa-solid fa-terminal"></i> Console</div>
+            <div><i class="fa-solid fa-terminal"></i> Terminal</div>
+        </div>
+        <div class="flex-group">
+            <div><i class="fa-solid fa-play"></i> Runner</div>
+            <div><i class="fa-solid fa-satellite-dish"></i> Start Proxy</div>
+            <div><i class="fa-solid fa-cookie-bite"></i> Cookies</div>
+            <div><i class="fa-solid fa-vault"></i> Vault</div>
+            <div><i class="fa-solid fa-trash-can"></i> Trash</div>
+        </div>
     </footer>
 
     <script src="js/app.js"></script>
 </body>
+
 </html>
