@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,107 +7,36 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
-
     <nav class="top-navbar">
         <div class="nav-left">
             <i class="fa-solid fa-bars"></i>
-            <i class="fa-solid fa-arrow-left" style="color: #555;"></i>
-            <i class="fa-solid fa-arrow-right" style="color: #555;"></i>
             <div class="nav-links">
                 <a href="#">Home</a>
-                <a href="#" class="dropdown">Workspaces <i class="fa-solid fa-chevron-down" style="font-size: 10px;"></i></a>
+                <a href="#">Workspaces</a>
                 <a href="#">API Network</a>
             </div>
         </div>
         <div class="nav-right">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <i class="fa-solid fa-user-plus"></i>
-            <i class="fa-solid fa-gear"></i>
-            <i class="fa-regular fa-bell"></i>
-            <i class="fa-solid fa-circle-user" style="font-size: 1.2rem;"></i>
-            <button class="btn-upgrade">Upgrade <i class="fa-solid fa-chevron-down"
-                    style="font-size: 10px;"></i></button>
+            <button class="btn-upgrade">Upgrade</button>
+            <i class="fa-solid fa-circle-user"></i>
         </div>
     </nav>
 
     <div class="app-container">
-
-        <!-- 2. ACTIVITY BAR EXACTA -->
+        
         <nav class="activity-bar">
-            <div class="activity-icon" title="Collections"><i class="fa-solid fa-folder"></i><span>Collections</span>
-            </div>
-            <div class="activity-icon active" title="Environments"><i
-                    class="fa-solid fa-box"></i><span>Environments</span></div>
-            <div class="activity-icon" title="History"><i class="fa-solid fa-clock-rotate-left"></i><span>History</span>
-            </div>
-            <div class="activity-icon" title="Flows"><i class="fa-solid fa-diagram-project"></i><span>Flows</span></div>
-
-            <div class="spacer"></div>
-
-            <div class="activity-icon" title="Files"><i class="fa-solid fa-folder-open"></i><span>Files<br><b
-                        style="font-size: 8px; color: #097bed;">BETA</b></span></div>
+            <div class="activity-icon" title="Collections"><i class="fa-solid fa-folder"></i></div>
+            <div class="activity-icon active" title="Environments"><i class="fa-solid fa-box"></i></div>
+            <div class="activity-icon" title="History"><i class="fa-solid fa-clock-rotate-left"></i></div>
         </nav>
 
-        <!-- 3. SIDEBAR IZQUIERDA (Panel Entornos Idéntico) -->
-        <aside class="sidebar-left">
-            <div class="sidebar-header-custom">
-                <div class="team-row">
-                    <div class="team-name">
-                        <i class="fa-solid fa-user-group"></i>
-                        Gestor Gastos DAW
-                    </div>
-                    <div class="sidebar-btns">
-                        <button>New</button>
-                        <button>Import</button>
-                    </div>
-                </div>
-
-                <div class="search-row">
-                    <i class="fa-solid fa-plus"></i>
-                    <div class="search-box">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                        <input type="text" placeholder="Search environments">
-                    </div>
-                </div>
-            </div>
-
-            <div class="globals-item">
-                Globals
-            </div>
-
-            <div class="empty-state">
-                <i class="fa-solid fa-user-astronaut"></i>
-                <h3>You don't have any environments.</h3>
-                <p>An environment is a set of variables that allows you to switch the context of your requests.</p>
-                <a href="#">Create Environment</a>
-            </div>
-        </aside>
-
-        <!-- 4. PANEL CENTRAL FUNCIONAL (Petición) -->
         <main class="main-content">
-            <!-- Tabs Superiores -->
             <div class="workspace-tabs">
-                <div class="tab-wrapper">
-                    <!-- Tab simulado como tu captura, pero listo para peticiones -->
-                    <div class="tab active">
-                        <span class="method">GET</span> Untitled Request
-                    </div>
-                    <div class="tab">
-                        <i class="fa-solid fa-folder" style="color: var(--text-muted); font-size: 14px;"></i> New
-                        Collection
-                    </div>
-                    <div class="tab"><i class="fa-solid fa-plus"></i></div>
-                </div>
-
-                <div class="env-selector">
-                    <i class="fa-regular fa-eye-slash"></i> No environment <i class="fa-solid fa-chevron-down"
-                        style="font-size: 10px;"></i>
-                </div>
+                <div class="tab active"><span class="method">GET</span> Untitled Request</div>
+                <div class="tab"><i class="fa-solid fa-plus"></i></div>
             </div>
 
-            <!-- Interfaz para probar backend de Spring Boot -->
             <div class="request-bar">
                 <div class="url-group">
                     <select id="methodSelect">
@@ -117,25 +45,19 @@
                         <option value="PUT">PUT</option>
                         <option value="DELETE">DELETE</option>
                     </select>
-                    <input type="text" id="urlInput" value="http://localhost:8085/api/users"
-                        placeholder="Introduce la URL (ej: http://localhost:8085/api/users)">
+                    <input type="text" id="urlInput" value="http://localhost:8085/api/users" placeholder="Introduce la URL">
                 </div>
                 <button id="sendBtn">Send</button>
             </div>
 
             <div class="config-tabs">
                 <div class="config-tab">Params</div>
-                <div class="config-tab">Authorization</div>
-                <div class="config-tab">Headers (9)</div>
+                <div class="config-tab">Headers</div>
                 <div class="config-tab active">Body</div>
-                <div class="config-tab">Pre-request Script</div>
-                <div class="config-tab">Tests</div>
-                <div class="config-tab">Settings</div>
             </div>
 
             <div class="request-body-container hidden" id="bodyContainer">
-                <textarea id="jsonInput"
-                    placeholder='{&#10;  "username": "nuevo_user",&#10;  "age": 25&#10;}'></textarea>
+                <textarea id="jsonInput" placeholder='{&#10;  "username": "nuevo_user",&#10;  "age": 25&#10;}'></textarea>
             </div>
 
             <div class="response-section">
@@ -144,7 +66,6 @@
                     <div class="response-meta">
                         <div>Status: <span id="statusCode">---</span></div>
                         <div>Time: <span id="responseTime">---</span> ms</div>
-                        <div>Size: <span>---</span></div>
                     </div>
                 </div>
                 <div class="response-body">
@@ -154,28 +75,11 @@
         </main>
     </div>
 
-    <!-- 5. BARRA INFERIOR (Footer) EXACTA -->
     <footer class="status-bar">
-        <div class="status-left">
-            <div class="status-item"><i class="fa-solid fa-bars-staggered"></i></div>
-            <div class="status-item"><i class="fa-solid fa-cloud"></i> Cloud View</div>
-            <div class="status-item"><i class="fa-solid fa-magnifying-glass"></i> Find and replace</div>
-            <div class="status-item"><i class="fa-solid fa-terminal"></i> Console</div>
-            <div class="status-item"><i class="fa-solid fa-code"></i> Terminal</div>
-        </div>
-        <div class="status-right">
-            <div class="status-item"><i class="fa-solid fa-play"></i> Runner</div>
-            <div class="status-item"><i class="fa-solid fa-satellite-dish"></i> Start Proxy</div>
-            <div class="status-item"><i class="fa-solid fa-cookie"></i> Cookies</div>
-            <div class="status-item"><i class="fa-solid fa-lock"></i> Vault</div>
-            <div class="status-item"><i class="fa-solid fa-trash"></i> Trash</div>
-            <div class="status-item"><i class="fa-regular fa-circle-question"></i></div>
-            <div class="status-item"><i class="fa-solid fa-border-none"></i></div>
-        </div>
+        <div><i class="fa-solid fa-cloud"></i> Cloud View</div>
+        <div><i class="fa-solid fa-terminal"></i> Console</div>
     </footer>
 
-    <!-- SCRIPT LOGICA FUNCIONAL -->
     <script src="js/app.js"></script>
 </body>
-
 </html>
