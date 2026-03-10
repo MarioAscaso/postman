@@ -26,7 +26,6 @@
     </nav>
 
     <div class="app-container">
-
         <nav class="activity-bar">
             <div class="activity-icon" title="Collections"><i class="fa-solid fa-folder"></i></div>
             <div class="activity-icon active" title="Environments"><i class="fa-solid fa-box"></i></div>
@@ -34,7 +33,6 @@
         </nav>
 
         <main class="main-content">
-
             <div class="workspace-tabs">
                 <div class="tab active"><span class="method">GET</span> Untitled Request</div>
             </div>
@@ -47,8 +45,7 @@
                         <option value="PUT">PUT</option>
                         <option value="DELETE">DELETE</option>
                     </select>
-                    <input type="text" id="urlInput" value="http://localhost:8085/api/users"
-                        placeholder="Introduce la URL">
+                    <input type="text" id="urlInput" value="http://localhost:8085/api/users" placeholder="Introduce la URL">
                 </div>
                 <button id="sendBtn">Send</button>
             </div>
@@ -69,8 +66,7 @@
             </div>
 
             <div class="request-body-container hidden" id="bodyContainer">
-                <textarea id="jsonInput"
-                    placeholder='{&#10;  "username": "nuevo_user",&#10;  "age": 25&#10;}'></textarea>
+                <textarea id="jsonInput" placeholder='{&#10;  "username": "nuevo_usuario",&#10;  "age": 25&#10;}'></textarea>
             </div>
 
             <div class="response-section">
@@ -82,10 +78,7 @@
                     </div>
                 </div>
                 <div class="response-body">
-
-                    <pre
-                        id="responseOutput"><span class="empty-state"><i class="fa-solid fa-user-astronaut"></i><span>Enter URL and click Send to get a response</span></span></pre>
-
+                    <pre id="responseOutput"><span class="empty-state"><i class="fa-solid fa-user-astronaut"></i><span>Enter URL and click Send to get a response</span></span></pre>
                 </div>
             </div>
         </main>

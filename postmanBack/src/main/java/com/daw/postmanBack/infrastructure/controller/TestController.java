@@ -17,8 +17,10 @@ public class TestController {
     private List<TestItem> database = new ArrayList<>();
 
     public TestController() {
-        database.add(new TestItem(1L, "Laptop", "High end laptop"));
-        database.add(new TestItem(2L, "Mouse", "Wireless mouse"));
+        database.add(new TestItem(1L, "Portátil", "Ordenador portátil"));
+        database.add(new TestItem(2L, "Ratón", "Ratón inalámbrico"));
+        database.add(new TestItem(3L, "Teclado", "Teclado conectado al portátil"));
+        database.add(new TestItem(3L, "Cargador", "Enchufe para cargar el portátil"));
     }
 
     @GetMapping
@@ -31,23 +33,19 @@ public class TestController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getItemById(@PathVariable Long id) {
-        Optional<TestItem> item = database.stream()
-                .filter(i -> i.getId().equals(id))
-                .findFirst();
+        Optional<TestItem> item = database.stream().filter(i -> i.getId().equals(id)).findFirst();
 
         if (item.isPresent()) {
             return ResponseEntity.ok(item.get());
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("Error: Item with ID " + id + " not found.");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Error: Item with ID " + id + " not found.");
         }
     }
 
     @PostMapping
     public ResponseEntity<?> createItem(@RequestBody TestItem newItem) {
         if (newItem.getName() == null || newItem.getName().trim().isEmpty()) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body("Error: Name is mandatory.");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: Name is mandatory.");
         }
 
         newItem.setId((long) (database.size() + 1));
@@ -58,9 +56,7 @@ public class TestController {
 
     @PutMapping("/{id}")
     public ResponseEntity<?> updateItem(@PathVariable Long id, @RequestBody TestItem updatedInfo) {
-        Optional<TestItem> itemFound = database.stream()
-                .filter(i -> i.getId().equals(id))
-                .findFirst();
+        Optional<TestItem> itemFound = database.stream().filter(i -> i.getId().equals(id)).findFirst();
 
         if (itemFound.isPresent()) {
             TestItem item = itemFound.get();
@@ -68,8 +64,7 @@ public class TestController {
             item.setDescription(updatedInfo.getDescription());
             return ResponseEntity.ok(item);
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("Error: Cannot update. ID " + id + " not found.");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Error: Cannot update. ID " + id + " not found.");
         }
     }
 
@@ -80,8 +75,7 @@ public class TestController {
         if (removed) {
             return ResponseEntity.noContent().build();
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("Error: Cannot delete. ID " + id + " doesn't exist.");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Error: Cannot delete. ID " + id + " doesn't exist.");
         }
     }
 }

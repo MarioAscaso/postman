@@ -53,8 +53,7 @@ public class UserController {
         if (removed) {
             return ResponseEntity.noContent().build();
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("Error: Cannot delete. User ID " + id + " doesn't exist.");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Error: Cannot delete. User ID " + id + " doesn't exist.");
         }
     }
 
